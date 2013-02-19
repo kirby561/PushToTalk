@@ -1,0 +1,40 @@
+------------------
+-- Push To Talk --
+------------------
+
+	About
+	-----
+		This is a simple tool that gives you a single "Push To Talk" 
+		hotkey for all of your voice applications such as the following:
+			o Skype
+			o Google Hangout
+			o In-game voice
+			o Anything with a voice-activated or always-on microphone.
+			
+		What does it do?
+			o Unmutes all microphones when you press a configurable key.
+			o Reduces main volume while the key is down.
+			o Works globally, so it can run in the 
+				background while a game is in the foreground, for example.
+
+			
+	Development
+	-----------
+		Push To Talk is written in C# and uses Windows Presentation Foundation (WPF).
+		All you need for development is Visual Studio or Visual C# Express 2010.
+		Download Visual C# Express 2010 for free at: 
+				http://www.microsoft.com/visualstudio/eng/downloads#d-2010-express
+				
+		To Build:
+			Open PushToTalk.sln
+			Press F5.
+			PushToTalk should build and run.
+		
+	Credits
+	-------
+		There are a couple open source projects and/or tutorials that I took code from.  
+		If I've gotten any of the source information wrong for these, please correct me! 
+		The following websites are where I first found the source code.
+		Special thanks to the authors!
+			- CoreAudioApi for C# (2/18/13): http://www.codeproject.com/Articles/18520/Vista-Core-Audio-API-Master-Volume-Control
+			- MinimizeToTray (2/18/13): http://cesso.org/Samples/MinimizeToTrayDemo/MinimizeToTrayDemo.zip
