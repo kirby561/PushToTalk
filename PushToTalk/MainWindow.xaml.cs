@@ -16,6 +16,9 @@ using PushToTalk.Properties;
 using System.Resources;
 using System.Drawing;
 using System.Windows.Interop;
+using System.Diagnostics;
+using CoreAudioApi.Interfaces;
+using System.Timers;
 
 namespace PushToTalk {
     /// <summary>
@@ -30,7 +33,6 @@ namespace PushToTalk {
         private List<MMDevice> _microphones = new List<MMDevice>();
         private List<MMDevice> _speakers = new List<MMDevice>();
         private float _normalSpeakerVolume;
-        private Boolean _minimizeToTray = true;
         private AudioEndPointVolumeVolumeRange _volumeRange;
         private MMDevice _activeSpeaker;
         private SolidColorBrush _keyDownBrush = new SolidColorBrush(Colors.Green);
@@ -41,6 +43,7 @@ namespace PushToTalk {
         private Icon _mainIcon = PushToTalk.Properties.Resources.mic;
         private float _keyDownVolumeLevel;
         private Boolean _loaded = false;
+        private AudioClientSessionEventsListener _audioEventsListener = new AudioClientSessionEventsListener();
 
         public MainWindow() {
             InitializeComponent();
@@ -56,6 +59,13 @@ namespace PushToTalk {
             _activeSpeaker = deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
             _volumeRange = _activeSpeaker.AudioEndpointVolume.VolumeRange;
             _normalSpeakerVolume = _activeSpeaker.AudioEndpointVolume.MasterVolumeLevel;
+
+            // ?? TODO: Add support for selecting applications that when their audio is above a certain level, turn down the audio of other applications.
+            //DevicePeriod dp = _activeSpeaker.DevicePeriod;
+            //Console.WriteLine(dp.DefaultPeriod);
+            //Console.WriteLine(dp.MinimumPeriod);
+            
+            
 
             for (int i = 0; i < micList.Count; i++) {
                 MMDevice mic = micList[i];
@@ -86,7 +96,7 @@ namespace PushToTalk {
         }
 
         /// <summary>
-        /// Sets the volume tot he desired value.
+        /// Sets the volume to the desired value.
         /// </summary>
         /// <param name="volume">  A float between 0.0 and 1.0 that represents 
         ///                         the % of the maximum volume when the mic is down.  </param>
@@ -96,6 +106,14 @@ namespace PushToTalk {
 
             Console.WriteLine("Setting active speaker volume to " + volume);
             _activeSpeaker.AudioEndpointVolume.MasterVolumeLevel = Math.Max(_normalSpeakerVolume - dB, _volumeRange.MindB);
+            for (int i = 0; i < _activeSpeaker.AudioSessionManager.Sessions.Count; i++) {
+                AudioSessionControl asc = _activeSpeaker.AudioSessionManager.Sessions[i];
+                Process proc = Process.GetProcessById((int)asc.ProcessID);
+                Console.WriteLine("Found Process: " + proc.MainModule.ModuleName + " Other: " + proc.MainModule.FileVersionInfo.ProductName);
+                Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(proc.MainModule.FileName);
+                
+                asc.RegisterAudioSessionNotification(_audioEventsListener);
+            }
         }
 
         private void MuteMic() {

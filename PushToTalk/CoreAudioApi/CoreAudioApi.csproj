@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioClient.cs" />
     <Compile Include="AudioEndpointVolume.cs" />
     <Compile Include="AudioEndpointVolumeCallback.cs" />
     <Compile Include="AudioEndpointVolumeChannel.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="AudioSessionManager.cs" />
     <Compile Include="AudioSessionState.cs" />
     <Compile Include="AudioVolumeNotificationData.cs" />
+    <Compile Include="DevicePeriod.cs" />
     <Compile Include="Interfaces\AUDIO_VOLUME_NOTIFICATION_DATA.cs" />
     <Compile Include="Interfaces\Blob.cs" />
     <Compile Include="Interfaces\CLSCTX.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="EEndpointHardwareSupport.cs" />
     <Compile Include="ERole.cs" />
     <Compile Include="Interfaces\eStgmAccess.cs" />
+    <Compile Include="Interfaces\IAudioClient.cs" />
     <Compile Include="Interfaces\IAudioEndpointVolume.cs" />
     <Compile Include="Interfaces\IAudioEndpointVolumeCallback.cs" />
     <Compile Include="Interfaces\IAudioMeterInformation.cs" />

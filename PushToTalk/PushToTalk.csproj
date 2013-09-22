@@ -39,12 +39,6 @@
     <ApplicationIcon>Resources\mic.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CoreAudioApi">
-      <HintPath>WindowsMicrophoneMuteLibraryBinaries\CoreAudioApi.dll</HintPath>
-    </Reference>
-    <Reference Include="MixerNativeLibrary">
-      <HintPath>WindowsMicrophoneMuteLibraryBinaries\MixerNativeLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -60,15 +54,13 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WindowsMicrophoneMuteLibrary">
-      <HintPath>WindowsMicrophoneMuteLibraryBinaries\WindowsMicrophoneMuteLibrary.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AudioClientSessionEventsListener.cs" />
     <Compile Include="Settings.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +117,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RedMic.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="CoreAudioApi\CoreAudioApi.csproj">
+      <Project>{9F1076AA-63DF-4128-9C10-FD65E425C783}</Project>
+      <Name>CoreAudioApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

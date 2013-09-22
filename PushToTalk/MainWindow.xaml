@@ -24,7 +24,7 @@
         <Button Grid.Row="1" Content="Change Key" Margin="10" VerticalAlignment="Center" Name="btnChangeKey" Click="btnChangeKey_Click" />
         <StackPanel Grid.Row="2" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <Label Content="Reduce volume by..." />
+                <Label Content="Reduce volume to..." />
                 <Label Name="_volumeLabel" Content="50%" />
             </StackPanel>
             <Slider Name="_volumeSlider" Minimum="0" Maximum="100" TickPlacement="BottomRight" SmallChange="1" LargeChange="10" TickFrequency="10" Value="50" ValueChanged="Slider_ValueChanged" MouseUp="_volumeSlider_MouseUp" />

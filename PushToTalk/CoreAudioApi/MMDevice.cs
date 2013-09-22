@@ -35,6 +35,7 @@ namespace CoreAudioApi
         private AudioMeterInformation _AudioMeterInformation;
         private AudioEndpointVolume _AudioEndpointVolume;
         private AudioSessionManager _AudioSessionManager;
+        private AudioClient _audioClient = null;
 
         #endregion
 
@@ -42,6 +43,7 @@ namespace CoreAudioApi
         private static Guid IID_IAudioMeterInformation = typeof(IAudioMeterInformation).GUID; 
         private static Guid IID_IAudioEndpointVolume = typeof(IAudioEndpointVolume).GUID;  
         private static Guid IID_IAudioSessionManager = typeof(IAudioSessionManager2).GUID;
+        private static Guid IID_IAudioClient = typeof(IAudioClient).GUID;
         #endregion
 
         #region Init
@@ -57,6 +59,12 @@ namespace CoreAudioApi
             object result;
             Marshal.ThrowExceptionForHR(_RealDevice.Activate(ref IID_IAudioSessionManager, CLSCTX.ALL, IntPtr.Zero, out result));
             _AudioSessionManager = new AudioSessionManager(result as IAudioSessionManager2);
+        }
+
+        private AudioClient GetAudioClient() {
+            object result;
+            Marshal.ThrowExceptionForHR(_RealDevice.Activate(ref IID_IAudioClient, CLSCTX.ALL, IntPtr.Zero, out result));
+            return new AudioClient(result as IAudioClient);
         }
 
         private void GetAudioMeterInformation()
@@ -135,6 +143,21 @@ namespace CoreAudioApi
             }
         }
 
+        public AudioClient AudioClient {
+            get {
+                if (_audioClient == null)
+                    _audioClient = GetAudioClient();
+                return _audioClient;
+            }
+        }
+
+        public DevicePeriod DevicePeriod {
+            get {
+                if (_audioClient == null)
+                    _audioClient = GetAudioClient();
+                return _audioClient.GetDevicePeriod();
+            }
+        }
 
         public string ID
         {
@@ -175,6 +198,5 @@ namespace CoreAudioApi
             _RealDevice = realDevice;
         }
         #endregion
-
     }
 }

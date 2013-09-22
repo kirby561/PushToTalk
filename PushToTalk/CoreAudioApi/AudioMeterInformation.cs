@@ -60,7 +60,7 @@ namespace CoreAudioApi
             }
         }
 
-        public float MasterPeakValue
+        public float GetPeakValue
         {
             get
             {
@@ -69,10 +69,6 @@ namespace CoreAudioApi
                 return result;
             }
         }
-
-       
-
-      
 
 
     }

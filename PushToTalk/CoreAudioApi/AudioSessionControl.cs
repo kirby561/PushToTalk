@@ -95,6 +95,14 @@ namespace CoreAudioApi
             }
         }
 
+        public Guid GetGroupingParam {
+            get {
+                Guid guid;
+                Marshal.ThrowExceptionForHR(_AudioSessionControl.GetGroupingParam(out guid));
+                return guid;
+            }
+        }
+
         public string IconPath
         {
             get
@@ -141,7 +149,7 @@ namespace CoreAudioApi
             }
         }
 
-        public bool IsSystemIsSystemSoundsSession
+        public bool IsSystemSoundsSession
         {
             get
             {

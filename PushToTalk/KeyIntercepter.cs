@@ -49,11 +49,27 @@ namespace PushToTalk {
             _proc = HookCallback;
             _hookID = SetHookKeyboard(_proc);
             _mouseHookId = SetHookMouse(_proc);
+
+            // Make sure the hooks succeeded
+            while (_hookID == IntPtr.Zero) {
+                MessageBoxResult dr = MessageBox.Show("Warning, failed to hook keyboard. Should I try again?", "Error", MessageBoxButton.YesNo);
+                if (dr != MessageBoxResult.Yes)
+                    break;
+                _hookID = SetHookKeyboard(_proc);
+            }
+
+            while (_mouseHookId == IntPtr.Zero) {
+                MessageBoxResult dr = MessageBox.Show("Warning, failed to hook mouse. Should I try again?", "Error", MessageBoxButton.YesNo);
+                if (dr != MessageBoxResult.Yes)
+                    break;
+                _mouseHookId = SetHookMouse(_proc);
+            }
         }
 
         public void Uninitialize() {
             UnhookWindowsHookEx(_hookID);
             UnhookWindowsHookEx(_mouseHookId);
+            _callbacks.Clear();
         }
 
         public void AddCallback(OnKeyActionDelegate callback) {
@@ -89,7 +105,6 @@ namespace PushToTalk {
             int nCode, IntPtr wParam, IntPtr lParam) {
             if (nCode >= 0) {
                 int vkCode = Marshal.ReadInt32(lParam);
-
                 if (wParam == (IntPtr)WM_KEYDOWN) {
                     notifyCallback(vkCode, true);
                 } else if (wParam == (IntPtr)WM_KEYUP) {
