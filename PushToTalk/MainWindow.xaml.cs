@@ -64,8 +64,8 @@ namespace PushToTalk {
             //DevicePeriod dp = _activeSpeaker.DevicePeriod;
             //Console.WriteLine(dp.DefaultPeriod);
             //Console.WriteLine(dp.MinimumPeriod);
-            
-            
+
+
 
             for (int i = 0; i < micList.Count; i++) {
                 MMDevice mic = micList[i];
@@ -85,7 +85,7 @@ namespace PushToTalk {
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e) {
             SaveSettings();
             _interceptor.Uninitialize();
-            UnmuteMic();            
+            UnmuteMic();
             base.OnClosing(e);
         }
 
@@ -106,14 +106,6 @@ namespace PushToTalk {
 
             Console.WriteLine("Setting active speaker volume to " + volume);
             _activeSpeaker.AudioEndpointVolume.MasterVolumeLevel = Math.Max(_normalSpeakerVolume - dB, _volumeRange.MindB);
-            for (int i = 0; i < _activeSpeaker.AudioSessionManager.Sessions.Count; i++) {
-                AudioSessionControl asc = _activeSpeaker.AudioSessionManager.Sessions[i];
-                Process proc = Process.GetProcessById((int)asc.ProcessID);
-                Console.WriteLine("Found Process: " + proc.MainModule.ModuleName + " Other: " + proc.MainModule.FileVersionInfo.ProductName);
-                Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(proc.MainModule.FileName);
-                
-                asc.RegisterAudioSessionNotification(_audioEventsListener);
-            }
         }
 
         private void MuteMic() {
@@ -165,7 +157,7 @@ namespace PushToTalk {
             _settings.VolumeLevelOnKeyDown = _keyDownVolumeLevel;
             _settings.MinimizeToTray = _minimizeCheckBox.IsChecked == true;
             Console.WriteLine("Saving settings");
-            
+
             // Save to disk
             _settings.Save();
         }
@@ -234,6 +226,12 @@ namespace PushToTalk {
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e) {
             Console.WriteLine("Window size: " + _window.ActualWidth + ", " + _window.ActualHeight);
+        }
+
+        private void _debugButton_Click(object sender, RoutedEventArgs e) {
+            _interceptor.Uninitialize();
+            _interceptor.Initialize();
+            _interceptor.AddCallback(OnKeyAction);
         }
     }
 }

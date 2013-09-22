@@ -1,7 +1,7 @@
 ﻿<Window x:Class="PushToTalk.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Push To Talk" Loaded="Window_Loaded" Name="_window" Width="210" Height="180" SizeChanged="Window_SizeChanged"
+        Title="Push To Talk" Loaded="Window_Loaded" Name="_window" Width="211" Height="205" SizeChanged="Window_SizeChanged"
         MinWidth="210" MinHeight="180">
     <Grid>
         <Grid.RowDefinitions>
@@ -9,6 +9,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="24*" />
         </Grid.RowDefinitions>
         <Grid HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
@@ -33,5 +34,6 @@
             <Label Content="Minimize to tray?" />
             <CheckBox Name="_minimizeCheckBox" VerticalAlignment="Center" Checked="_minimizeCheckBox_Checked" />
         </StackPanel>
+        <Button Content="DEBUG" Margin="8,0,12,2" Name="_debugButton" VerticalAlignment="Center" Grid.Row="4" Click="_debugButton_Click" />
     </Grid>
 </Window>
