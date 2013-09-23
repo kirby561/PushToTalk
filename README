@@ -21,7 +21,7 @@
   Development
   -----------
     Push To Talk is written in C# and uses Windows Presentation Foundation (WPF).
-    All you need for development is Visual Studio or Visual C# Express 2010.
+    All you need for development is Visual Studio or Visual C# Express 2010 (and Windows).
     Download Visual C# Express 2010 for free at: 
     		http://www.microsoft.com/visualstudio/eng/downloads#d-2010-express
     		
