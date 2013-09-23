@@ -227,11 +227,5 @@ namespace PushToTalk {
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e) {
             Console.WriteLine("Window size: " + _window.ActualWidth + ", " + _window.ActualHeight);
         }
-
-        private void _debugButton_Click(object sender, RoutedEventArgs e) {
-            _interceptor.Uninitialize();
-            _interceptor.Initialize();
-            _interceptor.AddCallback(OnKeyAction);
-        }
     }
 }
