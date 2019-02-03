@@ -21,9 +21,8 @@
   Development
   -----------
     Push To Talk is written in C# and uses Windows Presentation Foundation (WPF).
-    All you need for development is Visual Studio or Visual C# Express 2010 (and Windows).
-    Download Visual C# Express 2010 for free at: 
-    		http://www.microsoft.com/visualstudio/eng/downloads#d-2010-express
+    All you need for development is Visual Studio. Note that this was written using Visual Studio 2010 Express, but
+		can be compiled still with the latest Visual Studio Community: https://visualstudio.microsoft.com/downloads/
     		
     To Build:
     	Open PushToTalk.sln
@@ -36,6 +35,6 @@
     If I've gotten any of the source information wrong for these, please correct me! 
     The following websites are where I first found the source code.
     Special thanks to the authors!
-      - CoreAudioApi for C# (2/18/13): http://www.codeproject.com/Articles/18520/Vista-Core-Audio-API-Master-Volume-Control
-      - MinimizeToTray (2/18/13): http://cesso.org/Samples/MinimizeToTrayDemo/MinimizeToTrayDemo.zip
+      - CoreAudioApi for C# (2/18/13): (Article removed) http://<span></span>www.codeproject.com/Articles/18520/Vista-Core-Audio-API-Master-Volume-Control
+      - MinimizeToTray (2/18/13): (Link broken now) http://<span></span>cesso.org/Samples/MinimizeToTrayDemo/MinimizeToTrayDemo.zip
     
